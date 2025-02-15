@@ -16,11 +16,13 @@ app.post("/send-email", async (req, res) => {
 
   try {
     let transporter = nodemailer.createTransport({
-      service: "gmail", // Use your email provider
-      auth: {
-        user: process.env.EMAIL, // Your email
-        pass: process.env.PASSWORD, // Your email password or app password
-      },
+        host: 'smtp.hostinger.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.EMAIL, // Your email
+            pass: process.env.PASSWORD, // Your email password or app password
+        },
     });
 
     let mailOptions = {
