@@ -10,6 +10,11 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+// Home Route
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
 // Email Route
 app.post("/send-email", async (req, res) => {
   const { name, email, message } = req.body;
@@ -20,14 +25,14 @@ app.post("/send-email", async (req, res) => {
         port: 465,
         secure: true,
         auth: {
-            user: process.env.EMAIL, // Your email
-            pass: process.env.PASSWORD, // Your email password or app password
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD,
         },
     });
 
     let mailOptions = {
       from: process.env.EMAIL,
-      to: process.env.RECIPIENT_EMAIL, // Your email to receive messages
+      to: process.env.RECIPIENT_EMAIL,
       subject: "New Contact Form Submission",
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     };
